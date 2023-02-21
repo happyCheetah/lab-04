@@ -14,7 +14,7 @@ def on_connect(client, userdata, flags, rc):
 
 if __name__ == '__main__':
     #get IP address
-    ip_address=0 
+    ip_address = socket.gethostbyname(socket.gethostname())
     """your code here"""
     #create a client object
     client = mqtt.Client()
@@ -41,11 +41,19 @@ if __name__ == '__main__':
 
     while True:
         #replace user with your USC username in all subscriptions
-        client.publish("user/ipinfo", f"{ip_address}")
+        client.publish("mlguo/ipinfo", f"{ip_address}")
         print("Publishing ip address")
         time.sleep(4)
 
         #get date and time 
         """your code here"""
+        date = datetime.now().strftime("%m/%d/%Y")
+        curr_time = datetime.now().strftime("%H:%M:%S")
+
         #publish date and time in their own topics
         """your code here"""
+        print("Publishing today's date")
+        client.publish("mlguo/date", f"{date}")
+        print("Publishing current time")
+        client.publish("mlguo/time", f"{curr_time}")
+
